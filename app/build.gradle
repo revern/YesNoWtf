@@ -9,7 +9,7 @@ android {
     compileSdkVersion versions.TARGET_SDK
     buildToolsVersion versions.BUILD_TOOLS
     defaultConfig {
-        applicationId "com.example.revern.rxpmbase"
+        applicationId "com.revern.yesnowtf"
         minSdkVersion versions.MIN_SDK
         targetSdkVersion versions.TARGET_SDK
         versionCode 1
