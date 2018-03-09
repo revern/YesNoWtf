@@ -1,8 +1,11 @@
 package com.revern.yesnowtf.ui.main
 
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.widget.ImageView
+import android.widget.ProgressBar
 import butterknife.BindView
 import com.bumptech.glide.Glide
 import com.revern.yesnowtf.di.di
@@ -13,6 +16,7 @@ import com.revern.yesnowtf.ui.base.BaseScreen
 
 class MainScreen : BaseScreen<MainPM>() {
 
+    @BindView(R.id.progress) lateinit var uiProgress: ProgressBar
     @BindView(R.id.gif) lateinit var uiGif: ImageView
     @BindView(R.id.random) lateinit var uiRandom: FloatingActionButton
     @BindView(R.id.yes) lateinit var uiYes: FloatingActionButton
@@ -23,8 +27,17 @@ class MainScreen : BaseScreen<MainPM>() {
 
     override fun providePresentationModel(): MainPM = di.instance()
 
+    override fun initViews() {
+        super.initViews()
+
+        uiShare.backgroundTintList = ColorStateList
+                .valueOf(activity!!.resources.getColor(R.color.colorAccentDark))
+    }
+
     override fun onBindPresentationModel(pm: MainPM) {
         super.onBindPresentationModel(pm)
+
+
 
         uiRandom.clicks().bindTo(pm.randomClick.consumer)
         uiYes.clicks().bindTo(pm.yesClick.consumer)

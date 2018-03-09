@@ -15,8 +15,11 @@ abstract class BaseScreen<PM : BasePresentationModel> : PmController<PM>() {
     override fun createView(inflater: LayoutInflater, container: ViewGroup, savedViewState: Bundle?): View {
         val view = inflater.inflate(screenLayout, container, false)
         ButterKnife.bind(this, view)
+        initViews()
         return view
     }
+
+    protected open fun initViews() {}
 
     override fun onBindPresentationModel(pm: PM) {
         pm.errors.observable.bindTo { showError(it) }
