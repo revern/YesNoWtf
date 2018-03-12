@@ -9,7 +9,6 @@ import java.io.File
 import okio.Okio
 import java.io.IOException
 
-
 class YesNoInteractor(private val api: Api) {
 
     fun take(type: String): Flowable<YesNoResponse> = api.take(type)
