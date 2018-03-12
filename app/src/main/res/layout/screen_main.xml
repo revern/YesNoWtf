@@ -26,6 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             />
+
     </FrameLayout>
 
     <FrameLayout
@@ -50,62 +51,25 @@
                 app:fabSize="normal"
                 />
 
-            <FrameLayout
-                android:id="@+id/yes_container"
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/yes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="8dp"
                 android:layout_toRightOf="@+id/random"
-                >
+                android:src="@drawable/ic_yes"
+                app:fabSize="normal"
+                />
 
-                <android.support.design.widget.FloatingActionButton
-                    android:id="@+id/yes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    app:fabSize="normal"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:elevation="6dp"
-                    android:gravity="center"
-                    android:text="Yes"
-                    android:textColor="@android:color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    />
-
-            </FrameLayout>
-
-            <FrameLayout
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/no"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/yes_container"
-                >
-
-                <android.support.design.widget.FloatingActionButton
-                    android:id="@+id/no"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    app:fabSize="normal"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:elevation="6dp"
-                    android:gravity="center"
-                    android:text="No"
-                    android:textColor="@android:color/black"
-                    android:textSize="22sp"
-                    android:textStyle="bold"
-                    />
-
-            </FrameLayout>
+                android:layout_margin="8dp"
+                android:layout_toRightOf="@+id/yes"
+                android:src="@drawable/ic_no"
+                app:fabSize="normal"
+                />
 
         </RelativeLayout>
 
@@ -115,7 +79,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:layout_margin="16dp"
-            android:src="@drawable/ic_share_black_24dp"
+            android:src="@drawable/ic_share"
             app:fabSize="normal"
             />
 
