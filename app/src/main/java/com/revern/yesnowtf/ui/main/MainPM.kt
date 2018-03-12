@@ -5,18 +5,19 @@ import com.revern.yesnowtf.model.entity.Type
 import com.revern.yesnowtf.ui.base.BasePresentationModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import java.io.File
 
 class MainPM(val interactor: YesNoInteractor) : BasePresentationModel() {
 
-    lateinit var gif: String
+    lateinit var gif: File
 
     val randomClick = Action<Unit>()
     val yesClick = Action<Unit>()
     val noClick = Action<Unit>()
     val shareClick = Action<Unit>()
 
-    val showGif = Command<String>(bufferSize = 1)
-    val share = Command<String>(bufferSize = 0)
+    val showGif = Command<File>(bufferSize = 1)
+    val share = Command<File>(bufferSize = 0)
 
     override fun onCreate() {
         super.onCreate()
@@ -39,8 +40,10 @@ class MainPM(val interactor: YesNoInteractor) : BasePresentationModel() {
 
     private fun loadGif(type: Type) {
         interactor.take(type.type).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe {
-            gif = it.image
-            showGif.consumer.accept(gif)
+            interactor.downloadGif(it.image).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe {
+                gif = it
+                showGif.consumer.accept(gif)
+            }
         }
     }
 

@@ -12,8 +12,4 @@
         <item name="android:actionBarStyle">@android:color/black</item>
     </style>
 
-    <style name="FabSecondary" parent="AppTheme">
-        <item name="colorAccent">@color/colorAccentDark</item>
-    </style>
-
 </resources>

@@ -111,7 +111,6 @@
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/share"
-            style="@style/FabSecondary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"

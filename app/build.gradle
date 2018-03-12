@@ -57,6 +57,8 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$versions.GLIDE"
     kapt "com.github.bumptech.glide:compiler:$versions.GLIDE"
 
+    implementation "com.karumi:dexter:$versions.DEXTER"
+
     debugImplementation stethoLibs
 
     testImplementation testLibs

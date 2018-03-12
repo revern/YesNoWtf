@@ -1,9 +1,8 @@
 package com.revern.yesnowtf.ui.main
 
 import android.content.Intent
-import android.content.res.ColorStateList
-import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
+import android.support.v4.content.FileProvider
 import android.widget.ImageView
 import android.widget.ProgressBar
 import butterknife.BindView
@@ -13,6 +12,7 @@ import com.github.salomonbrys.kodein.instance
 import com.jakewharton.rxbinding2.view.clicks
 import com.revern.yesnowtf.R
 import com.revern.yesnowtf.ui.base.BaseScreen
+import java.io.File
 
 class MainScreen : BaseScreen<MainPM>() {
 
@@ -27,17 +27,8 @@ class MainScreen : BaseScreen<MainPM>() {
 
     override fun providePresentationModel(): MainPM = di.instance()
 
-    override fun initViews() {
-        super.initViews()
-
-        uiShare.backgroundTintList = ColorStateList
-                .valueOf(activity!!.resources.getColor(R.color.colorAccentDark))
-    }
-
     override fun onBindPresentationModel(pm: MainPM) {
         super.onBindPresentationModel(pm)
-
-
 
         uiRandom.clicks().bindTo(pm.randomClick.consumer)
         uiYes.clicks().bindTo(pm.yesClick.consumer)
@@ -46,17 +37,17 @@ class MainScreen : BaseScreen<MainPM>() {
 
         pm.showGif.observable.bindTo { showGif(it) }
         pm.share.observable.bindTo { share(it) }
-
     }
 
-    private fun showGif(gifUrl: String) {
-        Glide.with(activity!!).asGif().load(gifUrl).into(uiGif)
+    private fun showGif(gifFile: File) {
+        Glide.with(activity!!).asGif().load(gifFile).into(uiGif)
     }
 
-    private fun share(gifUrl: String) {
+    private fun share(gif: File) {
         val intent = Intent(Intent.ACTION_SEND)
-        intent.putExtra(Intent.EXTRA_TEXT, gifUrl)
-        intent.type = "text/plain"
+        intent.type = "image/gif"
+        intent.putExtra(Intent.EXTRA_STREAM, FileProvider.getUriForFile(activity!!,
+                activity!!.applicationContext.packageName + ".my.package.name.provider", gif))
         startActivity(intent)
     }
 
