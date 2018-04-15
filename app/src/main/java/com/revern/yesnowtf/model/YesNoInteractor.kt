@@ -1,6 +1,5 @@
 package com.revern.yesnowtf.model
 
-import android.os.Environment
 import com.revern.yesnowtf.api.Api
 import com.revern.yesnowtf.model.entity.YesNoResponse
 import com.revern.yesnowtf.utils.storage.ExternalStorageUtils
