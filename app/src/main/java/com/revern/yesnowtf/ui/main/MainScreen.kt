@@ -16,12 +16,18 @@ import java.io.File
 
 class MainScreen : BaseScreen<MainPM>() {
 
-    @BindView(R.id.progress) lateinit var uiProgress: ProgressBar
-    @BindView(R.id.gif) lateinit var uiGif: ImageView
-    @BindView(R.id.random) lateinit var uiRandom: FloatingActionButton
-    @BindView(R.id.yes) lateinit var uiYes: FloatingActionButton
-    @BindView(R.id.no) lateinit var uiNo: FloatingActionButton
-    @BindView(R.id.share) lateinit var uiShare: FloatingActionButton
+    @BindView(R.id.progress)
+    lateinit var uiProgress: ProgressBar
+    @BindView(R.id.gif)
+    lateinit var uiGif: ImageView
+    @BindView(R.id.random)
+    lateinit var uiRandom: FloatingActionButton
+    @BindView(R.id.yes)
+    lateinit var uiYes: FloatingActionButton
+    @BindView(R.id.no)
+    lateinit var uiNo: FloatingActionButton
+    @BindView(R.id.share)
+    lateinit var uiShare: FloatingActionButton
 
     override val screenLayout = R.layout.screen_main
 
@@ -40,15 +46,19 @@ class MainScreen : BaseScreen<MainPM>() {
     }
 
     private fun showGif(gifFile: File) {
-        Glide.with(activity!!).asGif().load(gifFile).into(uiGif)
+        activity?.let {
+            Glide.with(it).asGif().load(gifFile).into(uiGif)
+        }
     }
 
     private fun share(gif: File) {
-        val intent = Intent(Intent.ACTION_SEND)
-        intent.type = "image/gif"
-        intent.putExtra(Intent.EXTRA_STREAM, FileProvider.getUriForFile(activity!!,
-                activity!!.applicationContext.packageName + ".my.package.name.provider", gif))
-        startActivity(intent)
+        activity?.let {
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.type = "image/gif"
+            intent.putExtra(Intent.EXTRA_STREAM, FileProvider.getUriForFile(it,
+                    it.applicationContext.packageName + ".my.package.name.provider", gif))
+            startActivity(intent)
+        }
     }
 
 }
