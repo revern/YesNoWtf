@@ -7,9 +7,11 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.io.File
 
-class MainPM(val interactor: YesNoInteractor) : BasePresentationModel() {
+class MainPM(private val interactor: YesNoInteractor) : BasePresentationModel() {
 
-    lateinit var gif: File
+    private lateinit var gif: File
+
+    val inProgress = State(false)
 
     val randomClick = Action<Unit>()
     val yesClick = Action<Unit>()
@@ -39,10 +41,18 @@ class MainPM(val interactor: YesNoInteractor) : BasePresentationModel() {
     }
 
     private fun loadGif(type: Type) {
-        interactor.take(type.type).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe {
-            interactor.downloadGif(it.image).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe {
-                gif = it
-                showGif.consumer.accept(gif)
+        interactor.take(type.type)
+                .doOnSubscribe{ inProgress.consumer.accept(true) }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    interactor.downloadGif(it.image)
+                            .doOnTerminate { inProgress.consumer.accept(false) }
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe {
+                                gif = it
+                                showGif.consumer.accept(gif)
             }
         }
     }

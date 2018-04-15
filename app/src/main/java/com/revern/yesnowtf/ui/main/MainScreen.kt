@@ -3,6 +3,7 @@ package com.revern.yesnowtf.ui.main
 import android.content.Intent
 import android.support.design.widget.FloatingActionButton
 import android.support.v4.content.FileProvider
+import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
 import butterknife.BindView
@@ -41,8 +42,19 @@ class MainScreen : BaseScreen<MainPM>() {
         uiNo.clicks().bindTo(pm.noClick.consumer)
         uiShare.clicks().bindTo(pm.shareClick.consumer)
 
+        pm.inProgress.observable bindTo { showProgress(it) }
         pm.showGif.observable.bindTo { showGif(it) }
         pm.share.observable.bindTo { share(it) }
+    }
+
+    private fun showProgress(inProgress: Boolean) {
+        if (inProgress) {
+            uiProgress.visibility = View.VISIBLE
+            uiGif.visibility = View.GONE
+        } else {
+            uiProgress.visibility = View.GONE
+            uiGif.visibility = View.VISIBLE
+        }
     }
 
     private fun showGif(gifFile: File) {
