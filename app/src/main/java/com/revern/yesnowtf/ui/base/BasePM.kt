@@ -3,7 +3,7 @@ package com.revern.yesnowtf.ui.base
 import me.dmdev.rxpm.PresentationModel
 import me.dmdev.rxpm.navigation.NavigationMessage
 
-abstract class BasePresentationModel : PresentationModel() {
+abstract class BasePM : PresentationModel() {
 
     val errors = Command<String>()
 

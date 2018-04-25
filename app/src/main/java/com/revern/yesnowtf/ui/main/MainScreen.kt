@@ -32,19 +32,19 @@ class MainScreen : BaseScreen<MainPM>() {
 
     override val screenLayout = R.layout.screen_main
 
-    override fun providePresentationModel(): MainPM = di.instance()
+    override fun providePresentationModel(): MainPM = MainPM(di.instance())
 
     override fun onBindPresentationModel(pm: MainPM) {
         super.onBindPresentationModel(pm)
 
-        uiRandom.clicks().bindTo(pm.randomClick.consumer)
-        uiYes.clicks().bindTo(pm.yesClick.consumer)
-        uiNo.clicks().bindTo(pm.noClick.consumer)
-        uiShare.clicks().bindTo(pm.shareClick.consumer)
+        uiRandom.clicks() bindTo pm.randomClick.consumer
+        uiYes.clicks() bindTo pm.yesClick.consumer
+        uiNo.clicks() bindTo pm.noClick.consumer
+        uiShare.clicks() bindTo pm.shareClick.consumer
 
         pm.inProgress.observable bindTo { showProgress(it) }
-        pm.showGif.observable.bindTo { showGif(it) }
-        pm.share.observable.bindTo { share(it) }
+        pm.gif.observable bindTo { showGif(it) }
+        pm.share.observable bindTo { share(it) }
     }
 
     private fun showProgress(inProgress: Boolean) {

@@ -8,7 +8,7 @@ import android.widget.Toast
 import butterknife.ButterKnife
 import me.dmdev.rxpm.base.PmController
 
-abstract class BaseScreen<PM : BasePresentationModel> : PmController<PM>() {
+abstract class BaseScreen<PM : BasePM> : PmController<PM>() {
 
     protected abstract val screenLayout: Int
 
