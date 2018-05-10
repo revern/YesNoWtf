@@ -3,12 +3,12 @@ package com.revern.yesnowtf.di.modules
 import android.content.Context
 import com.revern.yesnowtf.api.Api
 import com.revern.yesnowtf.utils.addStethoInterceptors
-import com.github.salomonbrys.kodein.Kodein
-import com.github.salomonbrys.kodein.bind
-import com.github.salomonbrys.kodein.instance
-import com.github.salomonbrys.kodein.singleton
 import okhttp3.Cache
 import okhttp3.OkHttpClient
+import org.kodein.di.Kodein
+import org.kodein.di.generic.bind
+import org.kodein.di.generic.instance
+import org.kodein.di.generic.singleton
 import java.io.File
 import java.util.concurrent.TimeUnit
 import retrofit2.converter.gson.GsonConverterFactory

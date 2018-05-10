@@ -1,6 +1,7 @@
 package com.revern.yesnowtf.ui.main
 
-import com.revern.yesnowtf.model.YesNoInteractor
+import com.bluelinelabs.conductor.Router
+import com.revern.yesnowtf.model.YesNoModel
 import com.revern.yesnowtf.model.entity.Type
 import com.revern.yesnowtf.ui.base.BasePM
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -8,7 +9,7 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import java.io.File
 
-class MainPM(private val interactor: YesNoInteractor) : BasePM() {
+class MainPM(private val router: Router, private val model: YesNoModel) : BasePM() {
 
     val inProgress = State(false)
     val gif = State<File>()
@@ -32,11 +33,11 @@ class MainPM(private val interactor: YesNoInteractor) : BasePM() {
     }
 
     private fun loadGif(type: Type) {
-        interactor.take(type.type)
+        model.take(type.type)
                 .subscribeOn(Schedulers.io())
                 .doOnSubscribe { inProgress.consumer.accept(true) }
                 .doOnTerminate { inProgress.consumer.accept(false) }
-                .flatMap { interactor.downloadGif(it.image) }
+                .flatMap { model.downloadGif(it.image) }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(onNext = {
                     gif.consumer.accept(it)

@@ -4,19 +4,22 @@ import android.content.Intent
 import android.support.v4.content.FileProvider
 import android.view.View
 import com.bumptech.glide.Glide
-import com.github.salomonbrys.kodein.instance
 import com.jakewharton.rxbinding2.view.clicks
 import com.revern.yesnowtf.R
 import com.revern.yesnowtf.di.di
 import com.revern.yesnowtf.ui.base.BaseScreen
 import kotlinx.android.synthetic.main.screen_main.view.*
+import org.kodein.di.generic.instance
 import java.io.File
 
 class MainScreen : BaseScreen<MainPM>() {
 
     override val screenLayout = R.layout.screen_main
 
-    override fun providePresentationModel(): MainPM = MainPM(di.instance())
+    override fun providePresentationModel(): MainPM {
+        val pm: MainPM by di.instance(arg = router)
+        return pm
+    }
 
     override fun onBindPresentationModel(pm: MainPM) {
         super.onBindPresentationModel(pm)

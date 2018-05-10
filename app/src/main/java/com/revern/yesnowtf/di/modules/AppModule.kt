@@ -3,12 +3,15 @@ package com.revern.yesnowtf.di.modules
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
-import com.github.salomonbrys.kodein.*
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.revern.yesnowtf.utils.storage.IStorage
 import com.revern.yesnowtf.utils.storage.Storage
+import org.kodein.di.Kodein
+import org.kodein.di.generic.bind
+import org.kodein.di.generic.instance
+import org.kodein.di.generic.singleton
 
 fun appModule(application: Application) = Kodein.Module {
 
