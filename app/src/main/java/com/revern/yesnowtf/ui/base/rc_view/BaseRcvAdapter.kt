@@ -15,7 +15,7 @@ open class BaseRcvAdapter<T, VH : BaseRcvHolder<T>>(
         holder.itemView.setOnClickListener {
             val position = holder.adapterPosition
             if (position != RecyclerView.NO_POSITION)
-                onRcvItemClickFunc?.invoke(getItems()[position])
+                onRcvItemClickFunc?.invoke(items[position])
         }
         return holder
     }
