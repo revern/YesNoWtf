@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     companion object {
-        const val MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1
+        const val PERMISSIONS_REQUEST_READ_CONTACTS = 1
     }
 
     private lateinit var router: Router
@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun takePermissions(): Boolean = if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
-        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE), MY_PERMISSIONS_REQUEST_READ_CONTACTS)
+        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE), PERMISSIONS_REQUEST_READ_CONTACTS)
         false
     } else {
         true
@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         when (requestCode) {
-            MY_PERMISSIONS_REQUEST_READ_CONTACTS -> {
+            PERMISSIONS_REQUEST_READ_CONTACTS -> {
                 if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                     initRouter()
                 } else {

@@ -14,14 +14,14 @@
         >
 
         <ProgressBar
-            android:id="@+id/progress"
+            android:id="@+id/progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             />
 
         <ImageView
-            android:id="@+id/gif"
+            android:id="@+id/iv_gif"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -43,7 +43,7 @@
             >
 
             <android.support.design.widget.FloatingActionButton
-                android:id="@+id/random"
+                android:id="@+id/fab_random"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -52,21 +52,21 @@
                 />
 
             <android.support.design.widget.FloatingActionButton
-                android:id="@+id/yes"
+                android:id="@+id/fab_yes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:layout_toRightOf="@+id/random"
+                android:layout_toRightOf="@+id/fab_random"
                 android:src="@drawable/ic_yes"
                 app:fabSize="normal"
                 />
 
             <android.support.design.widget.FloatingActionButton
-                android:id="@+id/no"
+                android:id="@+id/fab_no"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:layout_toRightOf="@+id/yes"
+                android:layout_toRightOf="@+id/fab_yes"
                 android:src="@drawable/ic_no"
                 app:fabSize="normal"
                 />
@@ -74,7 +74,7 @@
         </RelativeLayout>
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/share"
+            android:id="@+id/fab_share"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"

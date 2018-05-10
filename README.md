@@ -1,11 +1,11 @@
-# RxPMBase
-### Skeleton for Android projects based on RxPM architecture
+# YesNoWtf
+### Application for watching and sharing random gifs with yes-no answers
+## api: https://yesno.wtf/api/
 
 ### Technologies:
 * Kotlin
 * RxPM
 * Conductor
-* ButterKnife
 * Kodein
 * RxJava
 * Retrofit

@@ -1,34 +1,18 @@
 package com.revern.yesnowtf.ui.main
 
 import android.content.Intent
-import android.support.design.widget.FloatingActionButton
 import android.support.v4.content.FileProvider
 import android.view.View
-import android.widget.ImageView
-import android.widget.ProgressBar
-import butterknife.BindView
 import com.bumptech.glide.Glide
-import com.revern.yesnowtf.di.di
 import com.github.salomonbrys.kodein.instance
 import com.jakewharton.rxbinding2.view.clicks
 import com.revern.yesnowtf.R
+import com.revern.yesnowtf.di.di
 import com.revern.yesnowtf.ui.base.BaseScreen
+import kotlinx.android.synthetic.main.screen_main.view.*
 import java.io.File
 
 class MainScreen : BaseScreen<MainPM>() {
-
-    @BindView(R.id.progress)
-    lateinit var uiProgress: ProgressBar
-    @BindView(R.id.gif)
-    lateinit var uiGif: ImageView
-    @BindView(R.id.random)
-    lateinit var uiRandom: FloatingActionButton
-    @BindView(R.id.yes)
-    lateinit var uiYes: FloatingActionButton
-    @BindView(R.id.no)
-    lateinit var uiNo: FloatingActionButton
-    @BindView(R.id.share)
-    lateinit var uiShare: FloatingActionButton
 
     override val screenLayout = R.layout.screen_main
 
@@ -37,10 +21,12 @@ class MainScreen : BaseScreen<MainPM>() {
     override fun onBindPresentationModel(pm: MainPM) {
         super.onBindPresentationModel(pm)
 
-        uiRandom.clicks() bindTo pm.randomClick.consumer
-        uiYes.clicks() bindTo pm.yesClick.consumer
-        uiNo.clicks() bindTo pm.noClick.consumer
-        uiShare.clicks() bindTo pm.shareClick.consumer
+        view?.let {
+            it.fab_random.clicks() bindTo pm.randomClick.consumer
+            it.fab_yes.clicks() bindTo pm.yesClick.consumer
+            it.fab_no.clicks() bindTo pm.noClick.consumer
+            it.fab_share.clicks() bindTo pm.shareClick.consumer
+        }
 
         pm.inProgress.observable bindTo { showProgress(it) }
         pm.gif.observable bindTo { showGif(it) }
@@ -48,18 +34,23 @@ class MainScreen : BaseScreen<MainPM>() {
     }
 
     private fun showProgress(inProgress: Boolean) {
-        if (inProgress) {
-            uiProgress.visibility = View.VISIBLE
-            uiGif.visibility = View.GONE
-        } else {
-            uiProgress.visibility = View.GONE
-            uiGif.visibility = View.VISIBLE
+        view?.let {
+            if (inProgress) {
+                it.progress_bar.visibility = View.VISIBLE
+                it.iv_gif.visibility = View.GONE
+            } else {
+                it.progress_bar.visibility = View.GONE
+                it.iv_gif.visibility = View.VISIBLE
+            }
         }
     }
 
     private fun showGif(gifFile: File) {
-        activity?.let {
-            Glide.with(it).asGif().load(gifFile).into(uiGif)
+        view?.let {
+            Glide.with(it.context)
+                    .asGif()
+                    .load(gifFile)
+                    .into(it.iv_gif)
         }
     }
 

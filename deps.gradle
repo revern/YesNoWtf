@@ -13,7 +13,7 @@ ext {
             RX_ANDROID : '2.0.2',
             RX_PM      : '1.1.2',
             RX_BINDING : '2.1.1',
-            GLIDE      : '4.6.1',
+            GLIDE      : '4.7.1',
             STETHO     : '1.5.0',
             JUNIT      : '4.12',
             TEST_RUNNER: '1.0.1',

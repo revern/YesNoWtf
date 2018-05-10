@@ -33,18 +33,8 @@ fun netModule(baseUrl: String) = Kodein.Module {
 
 private fun createHttpClient(cachedDir: File): OkHttpClient {
     val httpClientBuilder = OkHttpClient.Builder()
-    httpClientBuilder.cache(Cache(cachedDir, 20 * 1024 * 1024))
-    httpClientBuilder.readTimeout(30, TimeUnit.SECONDS)
+            .cache(Cache(cachedDir, 20 * 1024 * 1024))
+            .readTimeout(30, TimeUnit.SECONDS)
     addStethoInterceptors(httpClientBuilder)
-    httpClientBuilder.addInterceptor { chain ->
-        //            if (userSettings.userHasToken()) {
-        //                Request request = chain.request().newBuilder()
-        //                    .addHeader("X-User-Token", userSettings.getToken())
-        //                    .addHeader("X-User-Phone-Number", userSettings.getPhone())
-        //                    .build();
-        //                return chain.proceed(request);
-        //            }
-        chain.proceed(chain.request())
-    }
     return httpClientBuilder.build()
 }
